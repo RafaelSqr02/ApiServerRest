@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.0 (Python 3.12.3 on win32)" generated="2024-05-10T14:07:29.100265" rpa="false" schemaversion="5">
+<suite id="s1" name="serve-rest-API" source="C:\Users\pc gamer\Desktop\ApiServeRest\tests\serve-rest-API.robot">
+<test id="s1-t1" name="01 - Dado que realizamos um cadastro de um novo User e posteriormente a exclusão do mesmo" line="9">
+<kw name="Log" owner="BuiltIn">
+<msg time="2024-05-10T14:07:29.731693" level="INFO">Realizo o cadastro e a exclusão de um email</msg>
+<arg>Realizo o cadastro e a exclusão de um email</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2024-05-10T14:07:29.731693" elapsed="0.000000"/>
+</kw>
+<kw name="Generate POST and DELETE User" owner="actions-Post-ServerRest">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2024-05-10T14:07:29.732696" level="INFO">Creating Session using : alias=server_rest, url=https://serverest.dev, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
+<arg>alias=server_rest</arg>
+<arg>url=https://serverest.dev</arg>
+<arg>verify=true</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2024-05-10T14:07:29.732696" elapsed="0.000000"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2024-05-10T14:07:29.732696" level="INFO">${HEADER} = {'Content-Type': 'application/json'}</msg>
+<var>${HEADER}</var>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2024-05-10T14:07:29.732696" elapsed="0.000000"/>
+</kw>
+<kw name="Email" owner="FakerLibrary">
+<msg time="2024-05-10T14:07:29.733699" level="INFO">${EMAIL} = vhinton@example.net</msg>
+<var>${EMAIL}</var>
+<status status="PASS" start="2024-05-10T14:07:29.732696" elapsed="0.001003"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2024-05-10T14:07:30.317976" level="INFO">POST Request : url=https://serverest.dev/usuarios 
+ path_url=/usuarios 
+ headers={'User-Agent': 'python-requests/2.31.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '102'} 
+ body={"nome": "Fulano da Silva","email": "vhinton@example.net","password": "teste","administrador": "true"} 
+ </msg>
+<msg time="2024-05-10T14:07:30.317976" level="INFO">POST Response : url=https://serverest.dev/usuarios 
+ status=201, reason=Created 
+ headers={'access-control-allow-origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'content-type': 'application/json; charset=utf-8', 'X-Cloud-Trace-Context': '07ca9b74e0a8dd388b2551631aca6962;o=1', 'Date': 'Fri, 10 May 2024 17:07:31 GMT', 'Server': 'Google Frontend', 'Content-Length': '82'} 
+ body={
+    "message": "Cadastro realizado com sucesso",
+    "_id": "fB6lOPHhknOVumer"
+} 
+ </msg>
+<msg time="2024-05-10T14:07:30.317976" level="INFO">${RESPONSE} = &lt;Response [201]&gt;</msg>
+<var>${RESPONSE}</var>
+<arg>alias=server_rest</arg>
+<arg>url=/usuarios</arg>
+<arg>expected_status=201</arg>
+<arg>headers=${header}</arg>
+<arg>data={"nome": "Fulano da Silva","email": "${EMAIL}","password": "teste","administrador": "true"}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2024-05-10T14:07:29.733699" elapsed="0.584277"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>${Response.json()}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2024-05-10T14:07:30.317976" elapsed="0.001003"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2024-05-10T14:07:30.318979" level="INFO">${ID} = fB6lOPHhknOVumer</msg>
+<var>${ID}</var>
+<arg>${Response.json()["_id"]}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2024-05-10T14:07:30.318979" elapsed="0.000000"/>
+</kw>
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2024-05-10T14:07:30.318979" level="INFO">Creating Session using : alias=server_rest, url=https://serverest.dev, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
+<arg>alias=server_rest</arg>
+<arg>url=https://serverest.dev</arg>
+<arg>verify=true</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2024-05-10T14:07:30.318979" elapsed="0.000000"/>
+</kw>
+<kw name="DELETE On Session" owner="RequestsLibrary">
+<msg time="2024-05-10T14:07:30.883273" level="INFO">DELETE Request : url=https://serverest.dev/usuarios/fB6lOPHhknOVumer 
+ path_url=/usuarios/fB6lOPHhknOVumer 
+ headers={'User-Agent': 'python-requests/2.31.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0'} 
+ body=None 
+ </msg>
+<msg time="2024-05-10T14:07:30.883273" level="INFO">DELETE Response : url=https://serverest.dev/usuarios/fB6lOPHhknOVumer 
+ status=200, reason=OK 
+ headers={'access-control-allow-origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'content-type': 'application/json; charset=utf-8', 'X-Cloud-Trace-Context': '82b4ee67c30793ac14b415496aa6edae', 'Date': 'Fri, 10 May 2024 17:07:32 GMT', 'Server': 'Google Frontend', 'Content-Length': '51'} 
+ body={
+    "message": "Registro excluído com sucesso"
+} 
+ </msg>
+<msg time="2024-05-10T14:07:30.883273" level="INFO">${RESPONSE} = &lt;Response [200]&gt;</msg>
+<var>${RESPONSE}</var>
+<arg>alias=server_rest</arg>
+<arg>url=/usuarios/${ID}</arg>
+<arg>expected_status=200</arg>
+<doc>Sends a DELETE request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2024-05-10T14:07:30.319982" elapsed="0.563291"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>${Response.json()}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2024-05-10T14:07:30.883273" elapsed="0.001278"/>
+</kw>
+<status status="PASS" start="2024-05-10T14:07:29.731693" elapsed="1.152858"/>
+</kw>
+<doc>Descrição: Realizar um cadastro e uma exclusão do mesmo na API ServeRest
+Criação: 08/05/2024</doc>
+<tag>1</tag>
+<tag>positive</tag>
+<status status="PASS" start="2024-05-10T14:07:29.730691" elapsed="1.153860"/>
+</test>
+<test id="s1-t2" name="02 - Dado que realizamos um POST com um Email já cadastrado" line="18">
+<kw name="Log" owner="BuiltIn">
+<msg time="2024-05-10T14:07:30.884551" level="INFO">Tento cadastrar email já existente</msg>
+<arg>Tento cadastrar email já existente</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2024-05-10T14:07:30.884551" elapsed="0.000000"/>
+</kw>
+<kw name="Generate POST Email 400" owner="actions-Post-ServerRest">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2024-05-10T14:07:30.885817" level="INFO">Creating Session using : alias=server_rest, url=https://serverest.dev, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
+<arg>alias=server_rest</arg>
+<arg>url=https://serverest.dev</arg>
+<arg>verify=true</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2024-05-10T14:07:30.885817" elapsed="0.000000"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2024-05-10T14:07:30.885817" level="INFO">${HEADER} = {'Content-Type': 'application/json'}</msg>
+<var>${HEADER}</var>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2024-05-10T14:07:30.885817" elapsed="0.001012"/>
+</kw>
+<kw name="Email" owner="FakerLibrary">
+<msg time="2024-05-10T14:07:30.886829" level="INFO">${EMAIL} = ashleydean@example.com</msg>
+<var>${EMAIL}</var>
+<status status="PASS" start="2024-05-10T14:07:30.886829" elapsed="0.000000"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2024-05-10T14:07:31.454414" level="INFO">POST Request : url=https://serverest.dev/usuarios 
+ path_url=/usuarios 
+ headers={'User-Agent': 'python-requests/2.31.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '105'} 
+ body={"nome": "Fulano da Silva","email": "ghernandez@example.net","password": "teste","administrador": "true"} 
+ </msg>
+<msg time="2024-05-10T14:07:31.454414" level="INFO">POST Response : url=https://serverest.dev/usuarios 
+ status=400, reason=Bad Request 
+ headers={'access-control-allow-origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'content-type': 'application/json; charset=utf-8', 'X-Cloud-Trace-Context': 'd5ac7da219d08be48d3cb2f6aa02f064', 'Date': 'Fri, 10 May 2024 17:07:32 GMT', 'Server': 'Google Frontend', 'Content-Length': '53'} 
+ body={
+    "message": "Este email já está sendo usado"
+} 
+ </msg>
+<msg time="2024-05-10T14:07:31.454414" level="INFO">${RESPONSE} = &lt;Response [400]&gt;</msg>
+<var>${RESPONSE}</var>
+<arg>alias=server_rest</arg>
+<arg>url=/usuarios</arg>
+<arg>expected_status=400</arg>
+<arg>headers=${header}</arg>
+<arg>data={"nome": "Fulano da Silva","email": "ghernandez@example.net","password": "teste","administrador": "true"}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2024-05-10T14:07:30.886829" elapsed="0.567585"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>${Response.json()}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2024-05-10T14:07:31.454414" elapsed="0.000000"/>
+</kw>
+<status status="PASS" start="2024-05-10T14:07:30.885817" elapsed="0.568597"/>
+</kw>
+<doc>Descrição: Realizar um cadastro de um Email já existente
+Criação: 08/05/2024</doc>
+<tag>2</tag>
+<tag>negative</tag>
+<status status="PASS" start="2024-05-10T14:07:30.884551" elapsed="0.570865"/>
+</test>
+<doc>Teste de Criação e exclusão de um novo user</doc>
+<status status="PASS" start="2024-05-10T14:07:29.101265" elapsed="2.354151"/>
+</suite>
+<statistics>
+<total>
+<stat pass="2" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+<stat pass="1" fail="0" skip="0">1</stat>
+<stat pass="1" fail="0" skip="0">2</stat>
+<stat pass="1" fail="0" skip="0">negative</stat>
+<stat pass="1" fail="0" skip="0">positive</stat>
+</tag>
+<suite>
+<stat pass="2" fail="0" skip="0" id="s1" name="serve-rest-API">serve-rest-API</stat>
+</suite>
+</statistics>
+<errors>
+<msg time="2024-05-10T14:07:29.728684" level="ERROR">Error in file 'C:\Users\pc gamer\Desktop\ApiServeRest\resources\base.robot' on line 11: Error in file 'C:\Users\pc gamer\Desktop\ApiServeRest\tests\serve-rest-API.robot' on line 8: Resource file with 'Test Cases' section is invalid.</msg>
+</errors>
+</robot>
