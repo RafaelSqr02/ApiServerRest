@@ -1,9 +1,0 @@
-name: Run API Tests
-run-name: On Push - API Tests Run 
-on: [push]
-
-jobs: 
-  tests:
-    runs-on: ubuntu-20.04
-    steps:
-      - run:  echo "Hello Word!"
