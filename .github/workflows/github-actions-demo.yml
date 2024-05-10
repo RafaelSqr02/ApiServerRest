@@ -1,6 +1,6 @@
 name: Run API tests
 run-name: On Push - API tests Run
-On: [push]
+on: [push]
 
 jobs:
   test:
