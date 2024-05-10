@@ -19,5 +19,7 @@ Este repositório contém uma automação da API do Serverest, com objeitvo de t
 **Certifique-se de ter a seguinte biblioteca do Robot Framework instaladas:**
 
 **RequestsLibrary** 
+
 **FakerLibrary** 
+
 **collections** 
