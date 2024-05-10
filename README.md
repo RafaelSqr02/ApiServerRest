@@ -10,6 +10,10 @@ Este repositório contém uma automação da API do Serverest, com objeitvo de t
 
 **tests:** Aqui estão localizados os cenários dos testes automatizados.
 
+**actions:** Aqui estão localizados as Keywords criadas para o teste automatizado.
+
+![image](https://github.com/RafaelSqr02/ApiServerRest/assets/61230580/465da150-b62c-4bfd-8cf8-7ec61f0077ba)
+
 
 ## Pré-requisitos
 **Instalar o Python na versão mais atualizada.**
@@ -23,3 +27,5 @@ Este repositório contém uma automação da API do Serverest, com objeitvo de t
 **FakerLibrary** 
 
 **collections** 
+
+
